@@ -5,7 +5,7 @@
 
 copyright:
   years: 2024
-lastupdated: "2024-05-09"
+lastupdated: "2024-06-18"
 
 keywords: # Not typically populated
 
@@ -64,7 +64,7 @@ production: false
 {: toc-compliance="ISOIEC27001"}
 {: toc-version="1.0"}
 
-An organisation with an existing HPC on-premises facility may decide to augment this with cloud-based resources.  This reference architecture summarizes the best practices for deploying a Hybrid HPC environment connecting an on-premises HPC environment to a persistent pool of HPC compute on IBM Cloud.
+An organization with an existing HPC on-premises facility might decide to augment this with cloud-based resources.  This reference architecture summarizes the best practices for deploying a Hybrid HPC environment connecting an on-premises HPC environment to a persistent pool of HPC compute on IBM Cloud.
 
 ![Hybrid HPC high level architcture](./hybrid-hpc-cloud-pool-hla.drawio.svg "Hybrid HPC high level architcture"){: caption="Figure 1. High level Hybrid HPC architecture" caption-side="bottom"}
 
