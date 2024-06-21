@@ -5,7 +5,7 @@
 
 copyright:
   years: 2024
-lastupdated: "2024-06-18"
+lastupdated: "2024-06-21"
 
 keywords: # Not typically populated
 
@@ -64,7 +64,7 @@ production: false
 {: toc-compliance="ISOIEC27001"}
 {: toc-version="1.0"}
 
-This reference architecture summarizes the best practices for deploying a Hybrid HPC environment connecting an on-premises HPC environment to a persistent pool of HPC compute on {{site.data.keyword.Bluemix}}. An organization with an existing HPC on-premises facility might decide to augment this with cloud-based resources.  
+This reference architecture summarizes the best practices for deploying a Hybrid HPC environment connecting an on-premises High Performance Computing (HPC) environment to a persistent pool of HPC compute on {{site.data.keyword.Bluemix}}. An organization with an existing HPC on-premises facility might decide to augment this with cloud-based resources.  
 
 ![Hybrid HPC high level architcture](./hybrid-hpc-cloud-pool-hla.drawio.svg "Hybrid HPC high level architcture"){: caption="Figure 1. High level Hybrid HPC architecture" caption-side="bottom"}
 
@@ -88,7 +88,7 @@ Review the following architecture diagram for the software that is used to deliv
 
 From an infrastructure perspective, the HPC environment in {{site.data.keyword.Bluemix_notm}} consists of one or more HPC Cluster Management Nodes. Multiple nodes are deployed to provide resilience of the environment. These HPC Cluster Management Nodes distribute workloads across a pool of Compute Nodes. The number and type of Compute Nodes depends on the characteristics of the workload(s) needing to be run within the environment. Both HPC Cluster Management Nodes and Compute Nodes are deployed as Virtual Server Instances (VSIs) within a Virtual Private Cloud (VPC).
 
-Many HPC applications process data. A number of Storage Nodes are deployed to deliver this data to the Compute Nodes. The Storage Nodes typically use attached Block Storage and present a Shared File system within which the data is stored.  The Compute Nodes read and write data to the Shared File system.  There is also a requirement for a Shared File system to hold the metadata used by the HPC Cluster Management Nodes.  This is separate to the file system used to store the application data.
+Many HPC applications process data. A number of Storage Nodes are deployed to deliver this data to the Compute Nodes. The Storage Nodes typically use attached Block Storage and present a Shared File system within which the data is stored. The Compute Nodes read and write data to the Shared File system. There is also a requirement for a Shared File system to hold the metadata used by the HPC Cluster Management Nodes.  This is separate to the file system used to store the application data.
 
 The HPC environment in the cloud will likely need its own DNS service to provide name resolution and Virtual Private Endpoints for secure access to other cloud services such as Monitoring, Logging, IAM, and so on.
 
@@ -107,7 +107,7 @@ Review the following architecture diagram for the software that is used to deliv
 1. User invokes a compute job through an application, web browser, or command line interface.
 2. The job request is sent to the multicluster manager which uses pre-defined rules and policies to determine whether the job should be processed using on-premises HPC resources or in the cloud.
 3. The multicluster manager sends the compute job to the cluster manager for the respective cluster (on-premises or cloud). The job is then queued locally for dispatch to the compute node(s).
-4. The cluster manager sends the job to the HPC Agent. One agent runs on each of the compute nodes.  The agent runs the relevant application executables to perform the computation. As part of the computation, the application might access data stored in the shared filesystem.
+4. The cluster manager sends the job to the HPC Agent. One agent runs on each of the compute nodes. The agent runs the relevant application executables to perform the computation. As part of the computation, the application might access data stored in the shared file system.
 
 When the computational job completes, notification is sent back by the reverse route. The HPC agent informs the local cluster manager. This, in turn, informs the multicluster manager which returns the completion status to the user.
 
@@ -117,9 +117,9 @@ When the computational job completes, notification is sent back by the reverse r
 For those HPC applications that require data, there needs to be a mechanism to deliver data from on-premises to the cloud environment. There are two potential approaches that might be used to manage the movement of data:
 
 - The data movement is managed by the HPC workload scheduler.
-- The data movement is managed by the filesystem(s) holding the data.
+- The data movement is managed by the file system(s) holding the data.
 
-The following is the architecture diagram for the data layer that is used to deliver the Hybrid HPC with persistent cloud resource pools pattern.  This outlines the two data movement approaches.
+The following is the architecture diagram for the data layer that is used to deliver the Hybrid HPC with persistent cloud resource pools pattern. This outlines the two data movement approaches.
 
 ![Data architecture diagram for Hybrid HPC with persistent cloud resource pools.](./hybrid-hpc-cloud-pool-data.drawio.svg "Data architecture diagram for Hybrid HPC with persistent cloud resource pools"){: caption="Figure 4. Data architecture diagram for Hybrid HPC with persistent cloud resource pools" caption-side="bottom"}
 
@@ -128,17 +128,17 @@ The following is the architecture diagram for the data layer that is used to del
 
 1. User invokes a compute job through an application, web browser or command line interface.
 2. The job request is sent to the multicluster manager which uses pre-defined rules and policies to determine whether the job should be processed using on-premises HPC resources or in the cloud.
-3. The multicluster manager communicates with the data manager components. These are responsible for moving the data from the on-premises filesystem to the cloud filesystem. The data requirement information includes the in-cloud cluster that the job is eligible to be forwarded to.
+3. The multicluster manager communicates with the data manager components. These are responsible for moving the data from the on-premises file system to the cloud file system. The data requirement information includes the in-cloud cluster that the job is eligible to be forwarded to.
 4. The data manager in the cloud requests that the data file(s) get copied to the local staging area (cache) in the cloud. The data requirement information includes the candidate clusters that the job is eligible to be forwarded to.
-5. The required files are copied from the on-premises filesystem(s) to the in-cloud staging area.
+5. The required files are copied from the on-premises file system(s) to the in-cloud staging area.
 6. When the files are available in the cloud, the data manager informs the cluster manager that the data is in place and that the compute jobs can be run.
 
-#### Execution flow for filesystem-managed data movement
+#### Execution flow for file system-managed data movement
 {: #execution-flow-for-filesystem-managed-data-movement}
 
-{{site.data.keyword.IBM_notm}} Storage Scale provides a high-performance parallel filesystem to meet the needs of HPC workloads. Part of Storage Scale is a capability called Active File Management. Active File Management provides on-demand movement of applications that is transparent to the application using the filesystem.
+{{site.data.keyword.IBM_notm}} Storage Scale provides a high-performance parallel files ystem to meet the needs of HPC workloads. Part of Storage Scale is a capability called Active File Management. Active File Management provides on-demand movement of applications that is transparent to the application using the file system.
 
-When a user attempts to access a file in the cloud that is physically located on-premises, the Active File Management capability seamlessly manages the transfer of the file to the in-cloud filesystem. The in-cloud filesystem can be configured in different ways depending on whether it is to be used as a read-only "cache" or as a read-write filesystem. Data changes made to the in-cloud copy of the file are seamlessly transferred back to the primary copy stored on-premises.
+When a user attempts to access a file in the cloud that is physically located on-premises, the Active File Management capability seamlessly manages the transfer of the file to the in-cloud file system. The in-cloud file system can be configured in different ways depending on whether it is to be used as a read-only "cache" or as a read-write file system. Data changes made to the in-cloud copy of the file are seamlessly transferred back to the primary copy stored on-premises.
 
 ## Design concepts
 {: #design-concepts}
@@ -167,7 +167,7 @@ Other HPC cluster scheduler solutions from the open source community such as SLU
 #### Storage options
 {: #storage-options}
 
-Most HPC environments consume data stored in filesystems. {{site.data.keyword.Bluemix_notm}} provides two shared filesystems. VPC File Storage provides a lower performance filesystem that can be used to store the metadata required by the cluster management software or for low-use data storage for HPC workloads, for example, application binaries. Workloads needing high performance parallel filesystems should use IBM Storage Scale. This is best deployed on VPC Bare metal servers.
+Most HPC environments consume data stored in file systems. {{site.data.keyword.Bluemix_notm}} provides two shared file systems. VPC File Storage provides a lower performance file system that can be used to store the metadata required by the cluster management software or for low-use data storage for HPC workloads, for example, application binaries. Workloads needing high performance parallel file systems should use IBM Storage Scale. This is best deployed on VPC Bare metal servers.
 
 #### Compute nodes
 {: #compute-nodes}
@@ -200,7 +200,7 @@ The following table outlines the products or services used in the architecture f
 | -------------- | -------------- | -------------- |
 | Compute | [Virtual Servers for VPC](/docs/vpc?topic=vpc-about-advanced-virtual-servers&interface=ui) | HPC cluster management nodes and compute nodes |
 | Storage | [VPC File Storage](/docs/vpc?topic=vpc-file-storage-vpc-about) | Low performance storage for HPC management metadata and/or lightweight application data access needs |
-|  | [Storage Scale](/docs/storage-scale?topic=storage-scale-about-storage-scale) | High performance parallel filesystem for data-intensive HPC workloads |
+|  | [Storage Scale](/docs/storage-scale?topic=storage-scale-about-storage-scale) | High performance parallel file system for data-intensive HPC workloads |
 | Networking | [Virtual Private Endpoint (VPE)](docs/vpc?topic=vpc-about-vpe) | For private network access to Cloud Services, e.g., Key Protect, IAM, etc. |
 |  | [Public Gateway](/docs/vpc?topic=vpc-about-public-gateways) | For secure client access to the HPC environment over the Internet |
 |  | [Direct Link](/docs/dl?topic=dl-dl-about) | For private, dedicated connectivity between on-premises and cloud HPC resources |
