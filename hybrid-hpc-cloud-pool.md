@@ -64,9 +64,9 @@ production: false
 {: toc-compliance="ISOIEC27001"}
 {: toc-version="1.0"}
 
-This reference architecture summarizes the best practices for deploying a Hybrid HPC environment connecting an on-premises High Performance Computing (HPC) environment to a persistent pool of HPC compute on {{site.data.keyword.Bluemix}}. An organization with an existing HPC on-premises facility might decide to augment this with cloud-based resources.  
+This reference architecture summarizes the best practices for deploying a Hybrid High Performance Computing (HPC) environment connecting an on-premises HPC environment to a persistent pool of HPC compute on {{site.data.keyword.Bluemix}}. An organization with an existing HPC on-premises facility might decide to augment this with cloud-based resources.  
 
-![Hybrid HPC high level architcture](./hybrid-hpc-cloud-pool-hla.drawio.svg "Hybrid HPC high level architcture"){: caption="Figure 1. High level Hybrid HPC architecture" caption-side="bottom"}
+![Hybrid HPC high level architcture](./images/hybrid-hpc-cloud-pool-hla.drawio.svg "Hybrid HPC high level architcture"){: caption="Figure 1. High level Hybrid HPC architecture" caption-side="bottom"}
 
 In the diagram, an existing HPC environment on-premises is connected to an HPC environment in {{site.data.keyword.Bluemix_notm}}. Jobs can be submitted to and run on either compute environment. There is a communications link between the on-premises data center and the {{site.data.keyword.Bluemix_notm}} data center, for example, using a Direct Link. The Hybrid HPC environment is enabled by a hybrid HPC capability that hides the complexity of the environment from the user and automates decisions about which compute jobs are processed where through a set of rules and policies. Hybrid HPC environments where data needs to be transferred or kept synchronized between on-premises and the cloud will require a capability to enable this data movement.
 
@@ -84,7 +84,7 @@ The architecture for the Hybrid HPC with persistent cloud resource pools has mul
 
 Review the following architecture diagram for the software that is used to deliver the Hybrid HPC with persistent cloud resource pools pattern:
 
-![Infrastructure architecture diagram for Hybrid HPC with persistent cloud resource pools.](./hybrid-hpc-cloud-pool-infra.drawio.svg "Infrastructure architecture diagram for Hybrid HPC with persistent cloud resource pools"){: caption="Figure 2. Infrastructure architecture diagram for Hybrid HPC with persistent cloud resource pools" caption-side="bottom"}
+![Infrastructure architecture diagram for Hybrid HPC with persistent cloud resource pools.](./images/hybrid-hpc-cloud-pool-infra.drawio.svg "Infrastructure architecture diagram for Hybrid HPC with persistent cloud resource pools"){: caption="Figure 2. Infrastructure architecture diagram for Hybrid HPC with persistent cloud resource pools" caption-side="bottom"}
 
 From an infrastructure perspective, the HPC environment in {{site.data.keyword.Bluemix_notm}} consists of one or more HPC Cluster Management Nodes. Multiple nodes are deployed to provide resilience of the environment. These HPC Cluster Management Nodes distribute workloads across a pool of Compute Nodes. The number and type of Compute Nodes depends on the characteristics of the workload(s) needing to be run within the environment. Both HPC Cluster Management Nodes and Compute Nodes are deployed as Virtual Server Instances (VSIs) within a Virtual Private Cloud (VPC).
 
@@ -99,7 +99,7 @@ Network connectivity between the enterprise data center and {{site.data.keyword.
 
 Review the following architecture diagram for the software that is used to deliver the Hybrid HPC with persistent cloud resource pools pattern:
 
-![Software architecture diagram for Hybrid HPC with persistent cloud resource pools.](./hybrid-hpc-cloud-pool-sw.drawio.svg "Software architecture diagram for Hybrid HPC with persistent cloud resource pools"){: caption="Figure 3. Software architecture diagram for Hybrid HPC with persistent cloud resource pools" caption-side="bottom"}
+![Software architecture diagram for Hybrid HPC with persistent cloud resource pools.](./images/hybrid-hpc-cloud-pool-sw.drawio.svg "Software architecture diagram for Hybrid HPC with persistent cloud resource pools"){: caption="Figure 3. Software architecture diagram for Hybrid HPC with persistent cloud resource pools" caption-side="bottom"}
 
 #### Execution flow
 {: #execution-flow}
@@ -121,7 +121,7 @@ For those HPC applications that require data, there needs to be a mechanism to d
 
 The following is the architecture diagram for the data layer that is used to deliver the Hybrid HPC with persistent cloud resource pools pattern. This outlines the two data movement approaches.
 
-![Data architecture diagram for Hybrid HPC with persistent cloud resource pools.](./hybrid-hpc-cloud-pool-data.drawio.svg "Data architecture diagram for Hybrid HPC with persistent cloud resource pools"){: caption="Figure 4. Data architecture diagram for Hybrid HPC with persistent cloud resource pools" caption-side="bottom"}
+![Data architecture diagram for Hybrid HPC with persistent cloud resource pools.](./images/hybrid-hpc-cloud-pool-data.drawio.svg "Data architecture diagram for Hybrid HPC with persistent cloud resource pools"){: caption="Figure 4. Data architecture diagram for Hybrid HPC with persistent cloud resource pools" caption-side="bottom"}
 
 #### Execution flow for workload scheduler-managed data movement
 {: #execution-flow-for-workload-scheduler-managed-data-movement}
@@ -152,7 +152,7 @@ Review the design considerations and architecture decisions for the following as
 - **Resiliency:** High Availability
 - **Service Management:** Monitoring, Logging, Auditing and Tracking, Management and Orchestration
 
-![Architecture design scope](./hybrid-hpc-heat-map.svg "Architecture design scope"){: caption="Figure 5. Architecture design scope" caption-side="bottom"}
+![Architecture design scope](./images/hybrid-hpc-heat-map.svg "Architecture design scope"){: caption="Figure 5. Architecture design scope" caption-side="bottom"}
 
 ### Design choices
 {: #design-choices}
@@ -160,7 +160,7 @@ Review the design considerations and architecture decisions for the following as
 #### HPC cluster management software
 {: #hpc-cluster-mgmt-software}
 
-Different HPC problems require different HPC cluster management software solutions. {{site.data.keyword.Bluemix_notm}} provides two options. IBM Spectrum LSF is a batch scheduler. Users submit jobs onto a queue and these are processed in turn according to the policies and rules that have been defined. IBM Spectrum Symphony is a realtime scheduler that's designed to deliver faster response times and aimed specifically at the needs of the Financial Services industry. {{site.data.keyword.Bluemix_notm}} provides tiles that can automatically deploy these software solutions into an HPC cluster.
+Different HPC problems require different HPC cluster management software solutions. {{site.data.keyword.Bluemix_notm}} provides two options. IBM Spectrum LSF (Load Sharing Facility) is a batch scheduler. Users submit jobs onto a queue and these are processed in turn according to the policies and rules that have been defined. IBM Spectrum Symphony is a realtime scheduler that's designed to deliver faster response times and aimed specifically at the needs of the Financial Services industry. {{site.data.keyword.Bluemix_notm}} provides tiles that can automatically deploy these software solutions into an HPC cluster.
 
 Other HPC cluster scheduler solutions from the open source community such as SLURM and Condor, or from other commercial organizations are also available. These must be manually deployed.
 
