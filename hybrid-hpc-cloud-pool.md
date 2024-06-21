@@ -166,7 +166,7 @@ Review the design considerations and architecture decisions for the following as
 
 Different HPC problems require different HPC cluster management software solutions. {{site.data.keyword.Bluemix_notm}} provides two options. IBM Spectrum LSF (Load Sharing Facility) is a batch scheduler. Users submit jobs onto a queue and these are processed in turn according to the policies and rules that have been defined. IBM Spectrum Symphony is a realtime scheduler that's designed to deliver faster response times and aimed specifically at the needs of the Financial Services industry. {{site.data.keyword.Bluemix_notm}} provides tiles that can automatically deploy these software solutions into an HPC cluster.
 
-Other HPC cluster scheduler solutions from the open source community such as Slurm and Condor, or from other commercial organizations are also available. These must be manually deployed.
+Other HPC cluster scheduler solutions from the open source community such as Slurm and Condor, or from other commercial organizations are also available. These must be manually deployed. Refer to the websites of the open source projects or the documentation provided by commercial organizations for further information on how these can be used within the Hybrid HPC with persistent cloud resource pools architecture.
 
 #### Storage options
 {: #storage-options}
