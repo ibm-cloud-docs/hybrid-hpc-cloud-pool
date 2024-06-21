@@ -90,7 +90,7 @@ From an infrastructure perspective, the HPC environment in {{site.data.keyword.B
 
 Many HPC applications process data. A number of Storage Nodes are deployed to deliver this data to the Compute Nodes. The Storage Nodes typically use attached Block Storage and present a Shared File system within which the data is stored. The Compute Nodes read and write data to the Shared File system. There is also a requirement for a Shared File system to hold the metadata used by the HPC Cluster Management Nodes.  This is separate to the file system used to store the application data.
 
-The HPC environment in the cloud will likely need its own DNS service to provide name resolution and Virtual Private Endpoints for secure access to other cloud services such as Monitoring, Logging, IAM, and so on.
+The HPC environment in the cloud will likely need its own DNS service to provide name resolution and Virtual Private Endpoints for secure access to other cloud services such as Monitoring, Logging, Identity and Access management (IAM), and so on.
 
 Network connectivity between the enterprise data center and {{site.data.keyword.Bluemix_notm}} is likely to use a Direct Link private network.
 
@@ -104,7 +104,9 @@ Review the following architecture diagram for the software that is used to deliv
 #### Execution flow
 {: #execution-flow}
 
-1. User invokes a compute job through an application, web browser, or command line interface.
+To understand the interactions between the components of the Hybrid HPC with persistent cloud resource pools architecture, consider how a job is processed within the system.  A typical problem that runs on an HPC system will be split into multiple jobs which are then run on the many compute nodes within the system.  The way these are executed is:
+
+1. The user invokes a computation through an application, web browser, or command line interface.
 2. The job request is sent to the multicluster manager which uses pre-defined rules and policies to determine whether the job should be processed using on-premises HPC resources or in the cloud.
 3. The multicluster manager sends the compute job to the cluster manager for the respective cluster (on-premises or cloud). The job is then queued locally for dispatch to the compute node(s).
 4. The cluster manager sends the job to the HPC Agent. One agent runs on each of the compute nodes. The agent runs the relevant application executables to perform the computation. As part of the computation, the application might access data stored in the shared file system.
@@ -126,7 +128,9 @@ The following is the architecture diagram for the data layer that is used to del
 #### Execution flow for workload scheduler-managed data movement
 {: #execution-flow-for-workload-scheduler-managed-data-movement}
 
-1. User invokes a compute job through an application, web browser or command line interface.
+Applications process data.  This data needs to be available on the compute node(s) where the computation on that data will occur.  If the data resides on-premises and the computation will occur in the cloud, then the data will need to be moved to the cloud.  This data movement can be controlled by the workload scheduler.
+
+1. The user invokes a compute job through an application, web browser or command line interface.
 2. The job request is sent to the multicluster manager which uses pre-defined rules and policies to determine whether the job should be processed using on-premises HPC resources or in the cloud.
 3. The multicluster manager communicates with the data manager components. These are responsible for moving the data from the on-premises file system to the cloud file system. The data requirement information includes the in-cloud cluster that the job is eligible to be forwarded to.
 4. The data manager in the cloud requests that the data file(s) get copied to the local staging area (cache) in the cloud. The data requirement information includes the candidate clusters that the job is eligible to be forwarded to.
@@ -136,7 +140,7 @@ The following is the architecture diagram for the data layer that is used to del
 #### Execution flow for file system-managed data movement
 {: #execution-flow-for-filesystem-managed-data-movement}
 
-{{site.data.keyword.IBM_notm}} Storage Scale provides a high-performance parallel files ystem to meet the needs of HPC workloads. Part of Storage Scale is a capability called Active File Management. Active File Management provides on-demand movement of applications that is transparent to the application using the file system.
+{{site.data.keyword.IBM_notm}} Storage Scale provides a high-performance parallel file system to meet the needs of HPC workloads. Part of Storage Scale is a capability called Active File Management. Active File Management provides on-demand movement of applications that is transparent to the application using the file system.
 
 When a user attempts to access a file in the cloud that is physically located on-premises, the Active File Management capability seamlessly manages the transfer of the file to the in-cloud file system. The in-cloud file system can be configured in different ways depending on whether it is to be used as a read-only "cache" or as a read-write file system. Data changes made to the in-cloud copy of the file are seamlessly transferred back to the primary copy stored on-premises.
 
@@ -162,7 +166,7 @@ Review the design considerations and architecture decisions for the following as
 
 Different HPC problems require different HPC cluster management software solutions. {{site.data.keyword.Bluemix_notm}} provides two options. IBM Spectrum LSF (Load Sharing Facility) is a batch scheduler. Users submit jobs onto a queue and these are processed in turn according to the policies and rules that have been defined. IBM Spectrum Symphony is a realtime scheduler that's designed to deliver faster response times and aimed specifically at the needs of the Financial Services industry. {{site.data.keyword.Bluemix_notm}} provides tiles that can automatically deploy these software solutions into an HPC cluster.
 
-Other HPC cluster scheduler solutions from the open source community such as SLURM and Condor, or from other commercial organizations are also available. These must be manually deployed.
+Other HPC cluster scheduler solutions from the open source community such as Slurm and Condor, or from other commercial organizations are also available. These must be manually deployed.
 
 #### Storage options
 {: #storage-options}
