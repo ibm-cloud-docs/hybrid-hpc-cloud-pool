@@ -171,14 +171,14 @@ Other HPC cluster scheduler solutions from the open source community such as Slu
 #### Storage options
 {: #storage-options}
 
-Most HPC environments consume data stored in file systems. {{site.data.keyword.Bluemix_notm}} provides two shared file systems. VPC File Storage provides a lower performance file system that can be used to store the metadata required by the cluster management software or for low-use data storage for HPC workloads, for example, application binaries. Workloads needing high performance parallel file systems should use IBM Storage Scale. This is best deployed on VPC Bare metal servers.
+Most HPC environments consume data stored in file systems. {{site.data.keyword.Bluemix_notm}} provides two shared file systems. VPC File Storage provides a slower performance file system that can be used to store the metadata required by the cluster management software or for low-use data storage for HPC workloads, for example, application binaries. Workloads needing high performance parallel file systems should use IBM Storage Scale. This is best deployed on VPC Bare metal servers.
 
 #### Compute nodes
 {: #compute-nodes}
 
 Computation is performed in Virtual Servers (VSIs). There are many different VSI profiles that can be chosen to best meet the compute and memory requirements of the application(s) being run within the HPC environment. Consider an application that requires 3 vCPUs of compute and 7GB of memory. The needs of this application might be met by the cx2-4x8 VSI profile which provides 4 vCPUs and 8GB of memory. If this profile is chosen, one instance of the application runs on one compute node.  
 
-It is recommended that in environments where multiple applications with different resource needs run simultaneously, that the compute nodes be sized to support the largest application footprint. The {{site.data.keyword.IBM_notm}} workload scheduling software runs multiple instances of smaller workload on these larger VSIs to make optimal use of the compute resources available.
+It is recommended that in environments where multiple applications with different resource needs run simultaneously, that the compute nodes be sized to support the application footprint requiring the most CPU and memory. The {{site.data.keyword.IBM_notm}} workload scheduling software is able to run multiple instances of workloads with reduced CPU and memory needs on these VSIs to make optimal use of the compute resources available.
 
 ## Requirements
 {: #requirements}
