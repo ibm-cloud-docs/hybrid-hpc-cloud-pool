@@ -56,6 +56,8 @@ content-type: reference-architecture
 production: false
 ---
 
+{{site.data.keyword.attribute-definition-list}}
+
 # Hybrid HPC with persistent cloud resource pools
 {: #hybrid-hpc-pers-cloud-pool}
 {: toc-content-type="reference-architecture"}
