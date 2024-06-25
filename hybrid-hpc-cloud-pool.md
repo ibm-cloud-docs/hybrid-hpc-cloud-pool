@@ -1,13 +1,10 @@
 ---
 
-# The YAML header is required. For more information about the YAML header, see
-# https://test.cloud.ibm.com/docs/writing?topic=writing-reference-architectures
-
 copyright:
   years: 2024
-lastupdated: "2024-06-21"
+lastupdated: "2024-06-24"
 
-keywords: # Not typically populated
+keywords: HPC, resource pools, HPC compute
 
 subcollection: hybrid-hpc-cloud-pool
 
@@ -17,12 +14,8 @@ authors:
   - name: "John Easton"
     url: "linkedIn profile URL"
 
-# The release that the reference architecture describes
 version: 1.0
 
-# Use if the reference architecture has deployable code.
-# Value is the URL to land the user in the IBM Cloud catalog details page for the deployable architecture.
-# See https://test.cloud.ibm.com/docs/get-coding?topic=get-coding-deploy-button
 deployment-url: url
 
 docs: https://cloud.ibm.com/docs/solution-guide
@@ -37,21 +30,13 @@ related_links:
     url: 'https://url'
     description: 'Description'
 
-# use-case from 'code' column in
-# https://github.ibm.com/digital/taxonomy/blob/main/topics/topics_flat_list.csv
 use-case: HPConIBMCloud
 
-# industry from 'code' column in
-# https://github.ibm.com/digital/taxonomy/blob/main/industries/industries_flat_list.csv
 industry: FinancialSector, Electronics, Healthcare
 
-# compliance from 'code' column in
-# https://github.ibm.com/digital/taxonomy/blob/main/compliance_entities/compliance_entities_flat_list.csv
 compliance: ISOIEC27001
 
 content-type: reference-architecture
-
-# Set production to true to publish the reference architecture to IBM Cloud docs.
 
 production: false
 ---
