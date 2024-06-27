@@ -10,7 +10,6 @@ toc:
     use-case: HPConIBMCloud
     industry: FinancialSector, Electronics, Healthcare
     compliance: ISOIEC27001
-    version: 1.0
     navigation: hidden
     href: /docs/hybrid-hpc-cloud-pool
     path: hybrid-hpc-cloud-pool
