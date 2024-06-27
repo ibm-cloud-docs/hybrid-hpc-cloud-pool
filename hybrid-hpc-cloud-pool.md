@@ -62,7 +62,7 @@ Review the following architecture diagram for the software that is used to deliv
 
 From an infrastructure perspective, the HPC environment in {{site.data.keyword.Bluemix_notm}} consists of one or more HPC Cluster Management Nodes. Multiple nodes are deployed to provide resilience of the environment. These HPC Cluster Management Nodes distribute workloads across a pool of Compute Nodes. The number and type of Compute Nodes depends on the characteristics of the workload(s) needing to be run within the environment. Both HPC Cluster Management Nodes and Compute Nodes are deployed as Virtual Server Instances (VSIs) within a Virtual Private Cloud (VPC).
 
-Many HPC applications process data. A number of Storage Nodes are deployed to deliver this data to the Compute Nodes. The Storage Nodes typically use attached Block Storage and present a Shared File system within which the data is stored. The Compute Nodes read and write data to the Shared File system. There is also a requirement for a Shared File system to hold the metadata used by the HPC Cluster Management Nodes.  This is separate to the file system used to store the application data.
+Many HPC applications process data. A number of Storage Nodes are deployed to deliver this data to the Compute Nodes. The Storage Nodes typically use attached Block Storage and present a Shared File system within which the data is stored. The Compute Nodes read and write data to the Shared File system. There is also a requirement for a Shared File system to hold the metadata used by the HPC Cluster Management Nodes. This is separate to the file system used to store the application data.
 
 The HPC environment in the cloud will likely need its own DNS service to provide name resolution and Virtual Private Endpoints for secure access to other cloud services such as Monitoring, Logging, Identity and Access management (IAM), and so on.
 
@@ -78,7 +78,7 @@ Review the following architecture diagram for the software that is used to deliv
 #### Execution flow
 {: #execution-flow}
 
-To understand the interactions between the components of the Hybrid HPC with persistent cloud resource pools architecture, consider how a job is processed within the system.  A typical problem that runs on an HPC system will be split into multiple jobs which are then run on the many compute nodes within the system.  The way these are executed is:
+To understand the interactions between the components of the Hybrid HPC with persistent cloud resource pools architecture, consider how a job is processed within the system. A typical problem that runs on an HPC system will be split into multiple jobs which are then run on the many compute nodes within the system. The way these are executed is:
 
 1. The user invokes a computation through an application, web browser, or command line interface.
 2. The job request is sent to the multicluster manager which uses pre-defined rules and policies to determine whether the job should be processed using on-premises HPC resources or in the cloud.
@@ -102,7 +102,7 @@ The following is the architecture diagram for the data layer that is used to del
 #### Execution flow for workload scheduler-managed data movement
 {: #execution-flow-for-workload-scheduler-managed-data-movement}
 
-Applications process data.  This data needs to be available on the compute node(s) where the computation on that data will occur.  If the data resides on-premises and the computation will occur in the cloud, then the data will need to be moved to the cloud.  This data movement can be controlled by the workload scheduler.
+Applications process data. This data needs to be available on the compute node(s) where the computation on that data will occur. If the data resides on-premises and the computation will occur in the cloud, then the data will need to be moved to the cloud. This data movement can be controlled by the workload scheduler.
 
 1. The user invokes a compute job through an application, web browser or command line interface.
 2. The job request is sent to the multicluster manager which uses pre-defined rules and policies to determine whether the job should be processed using on-premises HPC resources or in the cloud.
