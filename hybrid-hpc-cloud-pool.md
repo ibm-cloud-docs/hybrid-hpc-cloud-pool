@@ -38,7 +38,7 @@ production: false
 {: toc-compliance="ISOIEC27001"}
 {: toc-version="1.0"}
 
-This reference architecture summarizes the best practices for deploying a Hybrid High Performance Computing (HPC) environment connecting an on-premises HPC environment to a persistent pool of HPC compute on {{site.data.keyword.Bluemix}}. An organization with an existing HPC on-premises facility might decide to augment this with cloud-based resources.  
+This reference architecture summarizes the best practices for deploying a Hybrid High Performance Computing (HPC) environment connecting an on-premises HPC environment to a persistent pool of HPC compute on {{site.data.keyword.Bluemix}}. An organization with an existing HPC on-premises facility might decide to augment this with cloud-based resources.
 
 ![Hybrid HPC high level architcture](./images/hybrid-hpc-cloud-pool-hla.drawio.svg "Hybrid HPC high level architcture"){: caption="Figure 1. High level Hybrid HPC architecture" caption-side="bottom"}
 
@@ -150,14 +150,14 @@ Most HPC environments consume data stored in file systems. {{site.data.keyword.B
 #### Compute nodes
 {: #compute-nodes}
 
-Computation is performed in Virtual Servers (VSIs). There are many different VSI profiles that can be chosen to best meet the compute and memory requirements of the application(s) being run within the HPC environment. Consider an application that requires 3 vCPUs of compute and 7GB of memory. The needs of this application might be met by the cx2-4x8 VSI profile which provides 4 vCPUs and 8GB of memory. If this profile is chosen, one instance of the application runs on one compute node.  
+Computation is performed in Virtual Servers (VSIs). There are many different VSI profiles that can be chosen to best meet the compute and memory requirements of the application(s) being run within the HPC environment. Consider an application that requires 3 vCPUs of compute and 7GB of memory. The needs of this application might be met by the cx2-4x8 VSI profile which provides 4 vCPUs and 8GB of memory. If this profile is chosen, one instance of the application runs on one compute node.
 
 It is recommended that in environments where multiple applications with different resource needs run simultaneously, that the compute nodes be sized to support the application footprint requiring the most CPU and memory. The {{site.data.keyword.IBM_notm}} workload scheduling software is able to run multiple instances of workloads with reduced CPU and memory needs on these VSIs to make optimal use of the compute resources available.
 
 ## Requirements
 {: #requirements}
 
-The following table outlines the requirements used in the architecture for each aspect: 
+The following table outlines the requirements used in the architecture for each aspect:
 
 | Aspect | Requirements |
 |-----| -----|
@@ -192,4 +192,3 @@ The following table outlines the products or services used in the architecture f
 |  | [IBM Cloud Log Analysis](/docs/log-analysis?topic=log-analysis-getting-started) | Operational logs |
 |  | [Activity Tracker Event Routing](/docs/activity-tracker?topic=activity-tracker-getting-started) | Audit logs |
 {: caption="Table 2. Components" caption-side="bottom"}
-
