@@ -18,18 +18,6 @@ version: 1.0
 
 deployment-url: url
 
-docs: https://cloud.ibm.com/docs/solution-guide
-
-image_source: https://github.com/terraform-ibm-modules/module/reference-architectures/xxx.svg
-
-# related_links:
-#  - title: 'Title'
-#    url: 'https://url.com'
-#    description: 'Description.'
-#  - title: 'related or follow-on architectures'
-#    url: 'https://url'
-#    description: 'Description'
-
 use-case: HPConIBMCloud
 
 industry: FinancialSector, Electronics, Healthcare
