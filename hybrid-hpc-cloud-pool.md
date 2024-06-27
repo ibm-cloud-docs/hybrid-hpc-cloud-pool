@@ -178,7 +178,7 @@ The following table outlines the products or services used in the architecture f
 | Compute | [Virtual Servers for VPC](/docs/vpc?topic=vpc-about-advanced-virtual-servers&interface=ui) | HPC cluster management nodes and compute nodes |
 | Storage | [VPC File Storage](/docs/vpc?topic=vpc-file-storage-vpc-about) | Low performance storage for HPC management metadata and/or lightweight application data access needs |
 |  | [Storage Scale](/docs/storage-scale?topic=storage-scale-about-storage-scale) | High performance parallel file system for data-intensive HPC workloads |
-| Networking | [Virtual Private Endpoint (VPE)](docs/vpc?topic=vpc-about-vpe) | For private network access to Cloud Services, e.g., Key Protect, IAM, etc. |
+| Networking | [Virtual Private Endpoint (VPE)](/docs/vpc?topic=vpc-about-vpe) | For private network access to Cloud Services, e.g., Key Protect, IAM, etc. |
 |  | [Public Gateway](/docs/vpc?topic=vpc-about-public-gateways) | For secure client access to the HPC environment over the Internet |
 |  | [Direct Link](/docs/dl?topic=dl-dl-about) | For private, dedicated connectivity between on-premises and cloud HPC resources |
 |  | [DNS](/docs/dns-svcs?topic=dns-svcs-about-dns-services) | Domain Name Services for the HPC environment |
