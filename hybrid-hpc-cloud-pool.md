@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024
-lastupdated: 2024-06-27
+lastupdated: "2024-06-27"
 
 keywords: HPC, resource pools, HPC compute, Hybrid Cloud, Hybrid HPC, high performance computing
 
@@ -161,11 +161,11 @@ The following table outlines the requirements that are addressed in this archite
 
 | Aspect | Requirements |
 | -------------- | -------------- |
-| Compute            | Provide properly isolated compute resources with adequate compute capacity for the applications. Remember to allow for the resource needs of the operating system and any other software needed. |
-| Storage            | Provide storage that meets the application data volume and performance requirements. |
-| Networking         | Deploy workloads in isolated environment and enforce information flow policies.  \n \n Provide secure, encrypted connectivity to the cloud’s private network for management purposes.  \n\n Distribute incoming application requests across available compute resources.  \n\n Support failover of application to alternate site in the event of planned or unplanned outages.  \n\n Provide public and private DNS resolution to support use of hostnames instead of IP addresses. |
-| Security           | Protect the boundaries of the application against Denial of Service and application-layer attacks.  \n\n If required, encrypt all application data in transit and at rest to protect from unauthorized disclosure.  \n\n Encrypt all security data, operational and audit logs, to protect from unauthorized disclosure. |
-| Resiliency         | Support application availability targets.  \n\n Ensure availability of the application in the event of planned and unplanned outages.  \n\n Provide highly available compute, storage, network, and other cloud services to handle application load and performance requirements.  \n\n Provide highly available storage for security data (logs) and backup data.  \n\n Automate recovery tasks to minimize down time. |
+| Compute | Provide properly isolated compute resources with adequate compute capacity for the applications. Remember to allow for the resource needs of the operating system and any other software needed. |
+| Storage | Provide storage that meets the application data volume and performance requirements. |
+| Networking | Deploy workloads in isolated environment and enforce information flow policies.  \n \n Provide secure, encrypted connectivity to the cloud’s private network for management purposes.  \n\n Distribute incoming application requests across available compute resources.  \n\n Support failover of application to alternate site in the event of planned or unplanned outages.  \n\n Provide public and private DNS resolution to support use of hostnames instead of IP addresses. |
+| Security | Protect the boundaries of the application against Denial of Service and application-layer attacks.  \n\n If required, encrypt all application data in transit and at rest to protect from unauthorized disclosure.  \n\n Encrypt all security data, operational and audit logs, to protect from unauthorized disclosure. |
+| Resiliency | Support application availability targets.  \n\n Ensure availability of the application in the event of planned and unplanned outages.  \n\n Provide highly available compute, storage, network, and other cloud services to handle application load and performance requirements.  \n\n Provide highly available storage for security data (logs) and backup data.  \n\n Automate recovery tasks to minimize down time. |
 | Service Management | Monitor system and application health metrics and logs to detect issues that might impact the availability of the application.  \n\n Generate alerts and notifications about issues that might impact the availability of applications to trigger appropriate responses to minimize down time.  \n\n Monitor audit logs to track changes and detect potential security problems.  \n\n Provide a mechanism to identify and send notifications about issues found in audit logs. |
 {: caption="Table 1. Requirements" caption-side="bottom"}
 
