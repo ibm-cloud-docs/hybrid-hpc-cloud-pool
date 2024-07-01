@@ -1,0 +1,21 @@
+#  Rename this file to `toc.yaml`
+#  Make sure you include all nav file coding requirements
+#  Anything with a fully qualified URL with `http` or `https` will get an external link icon added to the nav entry
+---
+toc:
+  properties:
+    subcollection: hybrid-hpc-cloud-pool
+    audience: solution
+    content-type: reference-architecture
+    use-case: HPConIBMCloud
+    industry: FinancialSector, Electronics, Healthcare
+    compliance: ISOIEC27001
+    navigation: hidden
+    href: /docs/hybrid-hpc-cloud-pool
+    path: hybrid-hpc-cloud-pool
+    label:  Hybrid HPC with persistent cloud resource pools
+  entries:
+  - navgroup:
+      id: architecture
+      topics:
+      - hybrid-hpc-cloud-pool.md
