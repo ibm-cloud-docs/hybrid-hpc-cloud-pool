@@ -19,3 +19,4 @@ toc:
       id: architecture
       topics:
       - hybrid-hpc-cloud-pool.md
+      - hybrid-hpc-dynamic-cloud-pool.md
