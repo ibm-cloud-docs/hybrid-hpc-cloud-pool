@@ -1,12 +1,12 @@
 ---
 
 copyright:
-  years: 2024
-lastupdated: "2024-08-05"
+  years: 2024, 2025
+lastupdated: "2025-02-27"
 
 keywords: HPC, resource pools, HPC compute, Hybrid Cloud, Hybrid HPC, high performance computing
 
-subcollection: hybrid-hpc-dynamic-cloud-pool
+subcollection: hybrid-hpc-cloud-pool
 
 authors:
   - name: John Easton
@@ -14,7 +14,7 @@ authors:
   - name: "John Easton"
     url: "linkedIn profile URL"
 
-version: 1.2
+version: 1.3
 
 deployment-url: url
 
@@ -27,27 +27,29 @@ compliance: ISOIEC27001
 content-type: reference-architecture
 
 production: false
+
 ---
+
 {{site.data.keyword.attribute-definition-list}}
 
 # Hybrid HPC with dynamic cloud resource pools
-{: #hybrid-hpc-dyn-cloud-pool}
+{: #hybrid-hpc-dynamic-cloud-pool}
 {: toc-content-type="reference-architecture"}
 {: toc-industry="FinancialSector, Electronics, Healthcare"}
 {: toc-use-case="HPConIBMCloud"}
 {: toc-compliance="ISOIEC27001"}
-{: toc-version="1.0"}
+{: toc-version="1.3"}
 
-This reference architecture summarizes the best practices for deploying a Hybrid High Performance Computing (HPC) environment connecting an on-premises HPC environment to a dynamically provisioned pool of HPC compute resources on {{site.data.keyword.Bluemix}}. An organization with an existing HPC on-premises facility might decide to augment this with these dynamic cloud-based resources.
+This reference architecture summarizes the best practices for deploying a Hybrid High Performance Computing (HPC) environment connecting an on-premises HPC environment to a dynamically provisioned pool of HPC compute resources on {{site.data.keyword.Bluemix}}. An organization with an existing HPC on-premises facility might decide to augment this facility with these dynamic cloud-based resources.
 
-![Hybrid HPC high level architecture](images/hybrid-hpc-cloud-pool-hla.drawio.svg "Hybrid HPC high level architecture"){: caption="Figure 1. High level Hybrid HPC architecture" caption-side="bottom"}
+![Hybrid HPC high level architecture](images/hybrid-hpc-cloud-pool-hla.drawio.svg "Hybrid HPC high level architecture"){: caption="High level Hybrid HPC architecture" caption-side="bottom"}
 
-In the diagram, an existing HPC environment on-premises is connected to an HPC environment in {{site.data.keyword.Bluemix_notm}}. Jobs can be submitted to and run on either compute environment. There is a communications link between the on-premises data center and the {{site.data.keyword.Bluemix_notm}} data center, for example, using a Direct Link. The Hybrid HPC environment is enabled by a hybrid HPC capability that hides the complexity of the environment from the user and automates decisions about which compute jobs are processed where through a set of rules and policies. Hybrid HPC environments where data needs to be transferred or kept synchronized between on-premises and the cloud will require a capability to enable this data movement.
+In the diagram, an existing HPC environment on-premises is connected to an HPC environment in {{site.data.keyword.Bluemix_notm}}. Jobs can be submitted to and run on either compute environment. There is a communications link between the on-premises data center and the {{site.data.keyword.Bluemix_notm}} data center, for example, using a Direct Link. The Hybrid HPC environment is enabled by a hybrid HPC capability that hides the complexity of the environment from the user and automates decisions about which compute jobs are processed where through a set of rules and policies. Hybrid HPC environments where data needs to be transferred or kept synchronized between on-premises and the cloud will also require a capability to enable this data movement.
 
 ## Architecture diagrams
 {: #dyn-rchitecture-diagrams}
 
-The architecture for the Hybrid HPC with persistent cloud resource pools has multiple constituent layers:
+The architecture for the Hybrid HPC with dynamic cloud resource pools has multiple constituent layers:
 
 1. Infrastructure layer
 1. Software layer
@@ -58,7 +60,7 @@ The architecture for the Hybrid HPC with persistent cloud resource pools has mul
 
 Review the following architecture diagram for the infrastructure and cloud services that are used to deliver the Hybrid HPC with dynamic cloud resource pools pattern:
 
-![Infrastructure architecture diagram for Hybrid HPC with dynamic cloud resource pools.](/images/hybrid-hpc-cloud-dynamic-pool-infra.drawio.svg "Infrastructure architecture diagram for Hybrid HPC with dynamic cloud resource pools"){: caption="Figure 2. Infrastructure architecture diagram for Hybrid HPC with dynamic cloud resource pools" caption-side="bottom"}
+![Infrastructure architecture diagram for Hybrid HPC with dynamic cloud resource pools.](/images/hybrid-hpc-cloud-dynamic-pool-infra.drawio.svg "Infrastructure architecture diagram for Hybrid HPC with dynamic cloud resource pools"){: caption="Infrastructure architecture diagram for Hybrid HPC with dynamic cloud resource pools" caption-side="bottom"}
 
 From an infrastructure perspective, the HPC environment in {{site.data.keyword.Bluemix_notm}} consists of one or more HPC Cluster Management Nodes. Multiple nodes are deployed to provide resilience of the environment. These HPC Cluster Management Nodes distribute workloads across a pool of Compute Nodes. The number and type of Compute Nodes depends on the characteristics of the workload(s) needing to be run within the environment. Both HPC Cluster Management Nodes and Compute Nodes are deployed as Virtual Server Instances (VSIs) within a Virtual Private Cloud (VPC).
 
@@ -75,7 +77,7 @@ Network connectivity between the enterprise data center and {{site.data.keyword.
 
 Review the following architecture diagram for the software that is used to deliver the Hybrid HPC with dynamic cloud resource pools pattern:
 
-![Software architecture diagram for Hybrid HPC with dynamic cloud resource pools.](/images/hybrid-hpc-cloud-dynamic-pool-sw.drawio.svg "Software architecture diagram for Hybrid HPC with dynamic cloud resource pools"){: caption="Figure 3. Software architecture diagram for Hybrid HPC with dynamic cloud resource pools" caption-side="bottom"}
+![Software architecture diagram for Hybrid HPC with dynamic cloud resource pools.](/images/hybrid-hpc-cloud-dynamic-pool-sw.drawio.svg "Software architecture diagram for Hybrid HPC with dynamic cloud resource pools"){: caption="Software architecture diagram for Hybrid HPC with dynamic cloud resource pools" caption-side="bottom"}
 
 #### Execution flow
 {: #dyn-execution-flow}
@@ -85,11 +87,11 @@ To understand the interactions between the components of the Hybrid HPC with dyn
 1. The user invokes a computation through an application, web browser, or command line interface.
 2. The job request is sent to the multicluster manager which uses pre-defined rules and policies to determine whether the job should be processed using on-premises HPC resources or in the cloud.
 3. The multicluster manager sends the compute job to the cluster manager for the respective cluster (on-premises or cloud). The job is then queued locally for dispatch to the compute node(s).
-4. The cloud cluster manager assesses the resource needs for the compute jobs.  If additional compute nodes are required to run the jobs, the cloud cluster manager uses an internal function called a Resource Connector to call the Autoscaler component.
-5. The autoscaler calls the IBM Cloud API to provision additional compute nodes into the cluster.  When these compute nodes are provisioned, the autoscaler informs the cloud cluster manager.
+4. The cloud cluster manager assesses the resource needs for the compute jobs.  If additional compute nodes are required to run the jobs, the cloud cluster manager uses an internal function called a Resource Connector to call the {{site.data.keyword.Bluemix_notm}} Autoscaler component.
+5. The autoscaler calls the {{site.data.keyword.Bluemix_notm}} API to provision additional compute nodes into the cluster.  When these compute nodes are provisioned, the autoscaler informs the cloud cluster manager.
 6. The cluster manager then sends the job to the HPC Agent. One agent runs on each of the compute nodes. The agent runs the relevant application executables to perform the computation. As part of the computation, the application might access data stored in the shared file system.
 
-When the computational job completes, notification is sent back by the reverse route. The HPC agent informs the local cluster manager. This, in turn, informs the multicluster manager which returns the completion status to the user. Compute nodes that are idle are removed from the cluster by the autoscaler according to a rule or policy.
+When the computational job completes, notification is sent back by the reverse route. The HPC agent informs the local cluster manager. This, in turn, informs the multicluster manager which returns the completion status to the user. Cloud compute nodes that are idle are removed from the cluster by the autoscaler according to a rule or policy.
 
 ### Data layer
 {: #dyn-data-layer}
@@ -99,9 +101,9 @@ For those HPC applications that require data, there needs to be a mechanism to d
 - The data movement is managed by the HPC workload scheduler.
 - The data movement is managed by the file system(s) holding the data.
 
-The following is the architecture diagram for the data layer that is used to deliver the Hybrid HPC with persistent cloud resource pools pattern. This outlines the two data movement approaches.
+The following is the architecture diagram for the data layer that is used to deliver the Hybrid HPC with dynamic cloud resource pools pattern. This outlines the two data movement approaches.
 
-![Data architecture diagram for Hybrid HPC with dynamic cloud resource pools.](/images/hybrid-hpc-cloud-pool-data.drawio.svg "Data architecture diagram for Hybrid HPC with dynamic cloud resource pools"){: caption="Figure 4. Data architecture diagram for Hybrid HPC with dynamic cloud resource pools" caption-side="bottom"}
+![Data architecture diagram for Hybrid HPC with dynamic cloud resource pools.](/images/hybrid-hpc-cloud-pool-data.drawio.svg "Data architecture diagram for Hybrid HPC with dynamic cloud resource pools"){: caption="Data architecture diagram for Hybrid HPC with dynamic cloud resource pools" caption-side="bottom"}
 
 #### Execution flow for workload scheduler-managed data movement
 {: #dyn-execution-flow-for-workload-scheduler-managed-data-movement}
@@ -115,10 +117,12 @@ Applications process data. This data needs to be available on the compute node(s
 5. The required files are copied from the on-premises file system(s) to the in-cloud staging area.
 6. When the files are available in the cloud, the data manager informs the cluster manager that the data is in place and that the compute jobs can be run.
 
+Note that this data movement and any autoscaling of the cloud compute nodes can occur in parallel.
+
 #### Execution flow for file system-managed data movement
 {: #dyn-execution-flow-for-filesystem-managed-data-movement}
 
-{{site.data.keyword.IBM_notm}} Storage Scale provides a high-performance parallel file system to meet the needs of HPC workloads. Part of Storage Scale is a capability called Active File Management. Active File Management provides on-demand movement of applications that is transparent to the application using the file system.  This is illustrated by Path A in the diagram.
+{{site.data.keyword.IBM_notm}} Storage Scale provides a high-performance parallel file system to meet the needs of HPC workloads. Part of Storage Scale is a capability called Active File Management (AFM). Active File Management provides on-demand movement of applications that is transparent to the application using the file system.  This is illustrated by Path A in the diagram.
 
 When a user attempts to access a file in the cloud that is physically located on-premises, the Active File Management capability seamlessly manages the transfer of the file to the in-cloud file system. The in-cloud file system can be configured in different ways depending on whether it is to be used as a read-only "cache" or as a read-write file system. Data changes made to the in-cloud copy of the file are seamlessly transferred back to the primary copy stored on-premises.
 
@@ -136,21 +140,21 @@ Review the design considerations and architecture decisions for the following as
 - **Resiliency:** High Availability
 - **Service Management:** Monitoring, Logging, Auditing and Tracking, Management and Orchestration
 
-![Architecture design scope](/images/hybrid-hpc-heat-map.svg "Architecture design scope"){: caption="Figure 5. Architecture design scope" caption-side="bottom"}
+![Architecture design scope](/images/hybrid-hpc-heat-map.svg "Architecture design scope"){: caption="Architecture design scope" caption-side="bottom"}
 
 ### Design choices
 {: #dyn-design-choices}
 
 When creating a Hybrid HPC environment using dynamic cloud resource pools the key decision that needs to be taken is which resources to provision dynamically. The following diagram shows the key components of the HPC environment (cluster management, data and compute) and the ways that these can be either permanently or dynamically provisioned.
 
-![Environment choices for Hybrid HPC with dynamic cloud resource pools.](/images/hybrid-hpc-dynamic-choice.drawio.svg "Environment choices for Hybrid HPC with dynamic cloud resource pools"){: caption="Figure 6. Environment choices for Hybrid HPC with dynamic cloud resource pools" caption-side="bottom"}
+![Environment choices for Hybrid HPC with dynamic cloud resource pools.](/images/hybrid-hpc-dynamic-choice.drawio.svg "Environment choices for Hybrid HPC with dynamic cloud resource pools"){: caption="Environment choices for Hybrid HPC with dynamic cloud resource pools" caption-side="bottom"}
 
 There is a spectrum of options with increasing cost, but also increasing responsiveness to business demands:
 
 - The lowest cost but least responsive option is where the entire HPC environment (cluster management, data, and compute) is created from scratch as and when required.
 - The next option is to permanently provision just the cluster management nodes and to provision both data and compute resources when required. In environments where there is no significant data required for computation to occur, this is likely to offer the best balance between minimized cost and greatest business responsiveness.
 - Environments that use significant volumes of data may benefit from a permanent data presence in the cloud. This improves business responsiveness at the cost of that cloud data storage and just the compute nodes are provisioned on demand.
-- Finally, there is the case where all HPC resources are permanently provisioned. [Hybrid HPC with Permanent Cloud Resource Pools](/docs/hybrid-hpc-cloud-pool) describes this option in more detail.
+- Finally, there is the case where all HPC resources are permanently provisioned. [Hybrid HPC with Permanent Cloud Resource Pools](/docs/hybrid-hpc-persistent-cloud-pool) describes this option in more detail.
 
 #### HPC cluster management software
 {: #dyn-hpc-cluster-mgmt-software}
@@ -167,11 +171,11 @@ Most HPC environments consume data stored in file systems. {{site.data.keyword.B
 #### Compute nodes
 {: #dyn-compute-nodes}
 
-Computation is performed in Virtual Servers (VSIs). There are many different VSI profiles that can be chosen to best meet the compute and memory requirements of the application(s) being run within the HPC environment. Consider an application that requires 3 vCPUs of compute and 7GB of memory. The needs of this application might be met by the cx2-4x8 VSI profile which provides 4 vCPUs and 8GB of memory. If this profile is chosen, one instance of the application runs on one compute node.
+Computation is performed in Virtual Servers (VSIs). There are many different VSI profiles that can be chosen to best meet the compute and memory requirements of the application(s) being run within the HPC environment. Consider an application that requires 3 vCPUs of compute and 7GB of memory. The needs of this application might be met by the cx2-4x8 VSI profile which provides 4 vCPUs and 8GB of memory. If this profile is chosen, one instance of the application runs on one compute node at any one time. As a comparison, a VSI profile such as cx2-64x128 could be chosen instead. The workload scheduler can be configured to pack multiple jobs into a single VSI.  In this case, 18 instances of the application could run within a single VSI with this profile.
 
 It is recommended that in environments where multiple applications with different resource needs run simultaneously, that the compute nodes be sized to support the application footprint requiring the most CPU and memory. The {{site.data.keyword.IBM_notm}} workload scheduling software is able to run multiple instances of workloads with reduced CPU and memory needs on these VSIs to make optimal use of the compute resources available.
 
-The number of compute nodes will vary over time as the autoscaler in conjunction with the cluster management software provisions and deprovisions capacity to meet the workload needs. Limits on the maximum and minimum numbers of nodes can be defined to ensure that costs can be controlled and that there is always some compute capability available for immediate use if needed.
+The number of compute nodes will vary over time as the autoscaler in conjunction with the cluster management software, provisions and deprovisions compute capacity to meet the workload needs. Limits on the maximum and minimum numbers of nodes can be defined to ensure that costs can be controlled and that there is always some compute capability available for immediate use if needed.
 
 ## Requirements
 {: #dyn-requirements}
@@ -186,7 +190,7 @@ The following table outlines the requirements used in the architecture for each 
 | Security | Protect the boundaries of the application against the Denial of Service and application-layer attacks.  \n If it's required, encrypt all the application data in transit and at rest to protect from unauthorized disclosure.  \n Encrypt all the security data and operational and audit logs to protect from unauthorized disclosure. |
 | Resiliency | Support application availability targets.  \n Ensure availability of the application in the event of a planned and an unplanned outage.  \n Provide highly available compute, storage, network, and other cloud services to handle application load and performance requirements.  \n Provide highly available storage for security data logs and backup data.  \n Automate recovery tasks to minimize down time.  \n The Autoscaler can be used to provision additional compute resources following a failure to ensure capacity is available to process compute jobs. |
 | Service management | Monitor system and application health metrics and logs to detect issues that might impact the availability of the application.  \n Generate alerts and notifications about issues that might impact the availability of applications to trigger appropriate responses to minimize down time.  \n Monitor audit logs to track changes and detect potential security problems.  \n Provide a mechanism to identify and send notifications about issues found in the audit logs. |
-{: caption="Table 1. Requirements" caption-side="bottom"}
+{: caption="Requirements" caption-side="bottom"}
 
 ## Components
 {: #dyn-components}
@@ -211,4 +215,4 @@ The following table outlines the products or services used in the architecture f
 |  | [IBM Cloud Monitoring](/docs/monitoring?topic=monitoring-about-monitor) | Operational monitoring |
 |  | [IBM Cloud Log Analysis](/docs/log-analysis?topic=log-analysis-getting-started) | Operational logs |
 |  | [Activity Tracker Event Routing](/docs/activity-tracker?topic=activity-tracker-getting-started) | Audit logs |
-{: caption="Table 2. Components" caption-side="bottom"}
+{: caption="Components" caption-side="bottom"}

@@ -13,10 +13,10 @@ toc:
     navigation: hidden
     href: /docs/hybrid-hpc-cloud-pool
     path: hybrid-hpc-cloud-pool
-    label:  Hybrid HPC with persistent cloud resource pools
+    label:  Hybrid HPC with cloud resource pools
   entries:
   - navgroup:
       id: architecture
       topics:
-      - hybrid-hpc-cloud-pool.md
+      - hybrid-hpc-persistent-cloud-pool.md
       - hybrid-hpc-dynamic-cloud-pool.md
