@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2025
-lastupdated: "2025-02-27"
+lastupdated: "2025-03-06"
 
 keywords: HPC, resource pools, HPC compute, Hybrid Cloud, Hybrid HPC, high performance computing
 
@@ -42,7 +42,7 @@ production: false
 
 This reference architecture summarizes the best practices for deploying a Hybrid High Performance Computing (HPC) environment connecting an on-premises HPC environment to a dynamically provisioned pool of HPC compute resources on {{site.data.keyword.Bluemix}}. An organization with an existing HPC on-premises facility might decide to augment this facility with these dynamic cloud-based resources.
 
-![Hybrid HPC high level architecture](images/hybrid-hpc-cloud-pool-hla.drawio.svg "Hybrid HPC high level architecture"){: caption="High level Hybrid HPC architecture" caption-side="bottom"}
+![Hybrid HPC high level architecture](/images/hybrid-hpc-cloud-pool-hla.drawio.svg "Hybrid HPC high level architecture"){: caption="High level Hybrid HPC architecture" caption-side="bottom"}
 
 In the diagram, an existing HPC environment on-premises is connected to an HPC environment in {{site.data.keyword.Bluemix_notm}}. Jobs can be submitted to and run on either compute environment. There is a communications link between the on-premises data center and the {{site.data.keyword.Bluemix_notm}} data center, for example, using a Direct Link. The Hybrid HPC environment is enabled by a hybrid HPC capability that hides the complexity of the environment from the user and automates decisions about which compute jobs are processed where through a set of rules and policies. Hybrid HPC environments where data needs to be transferred or kept synchronized between on-premises and the cloud will also require a capability to enable this data movement.
 
