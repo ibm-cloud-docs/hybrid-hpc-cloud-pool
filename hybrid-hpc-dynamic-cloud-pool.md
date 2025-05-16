@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2025
-lastupdated: "2025-03-06"
+lastupdated: "2025-05-15"
 
 keywords: HPC, resource pools, HPC compute, Hybrid Cloud, Hybrid HPC, high performance computing
 
@@ -40,7 +40,7 @@ production: false
 {: toc-compliance="ISOIEC27001"}
 {: toc-version="1.3"}
 
-This reference architecture summarizes the best practices for deploying a Hybrid High Performance Computing (HPC) environment connecting an on-premises HPC environment to a dynamically provisioned pool of HPC compute resources on {{site.data.keyword.Bluemix}}. An organization with an existing HPC on-premises facility might decide to augment this facility with these dynamic cloud-based resources.
+This reference architecture summarizes the best practices for deploying a Hybrid High Performance Computing (HPC) environment connecting an on-premises HPC environment to a dynamically provisioned pool of HPC compute resource on {{site.data.keyword.Bluemix}}. An organization with an existing HPC on-premises facility might decide to augment this facility with additional cloud-based resources to meet increased or changing business demands that fluctuate over time.
 
 ![Hybrid HPC high level architecture](/images/hybrid-hpc-cloud-pool-hla.drawio.svg "Hybrid HPC high level architecture"){: caption="High level Hybrid HPC architecture" caption-side="bottom"}
 
@@ -213,6 +213,5 @@ The following table outlines the products or services used in the architecture f
 | Resiliency | [Virtual Servers for VPC](/docs/vpc?topic=vpc-about-advanced-virtual-servers&interface=ui) in conjunction with [Spectrum LSF](/docs/ibm-spectrum-lsf?topic=ibm-spectrum-lsf-about-spectrum-lsf) or [Spectrum Symphony](/docs/hpc-spectrum-symphony?topic=hpc-spectrum-symphony-about-spectrum-symphony) | The HPC workload is split across multiple VSIs. The HPC Management software (LSF or Symphony) manages failures of compute nodes by resubmitting failed compute jobs to other VSIs |
 | Service Management | [Spectrum LSF](/docs/ibm-spectrum-lsf?topic=ibm-spectrum-lsf-about-spectrum-lsf) or [Spectrum Symphony](/docs/hpc-spectrum-symphony?topic=hpc-spectrum-symphony-about-spectrum-symphony) | HPC cluster management software provides application and performance status & monitoring, resource consumption and utilization |
 |  | [IBM Cloud Monitoring](/docs/monitoring?topic=monitoring-about-monitor) | Operational monitoring |
-|  | [IBM Cloud Log Analysis](/docs/log-analysis?topic=log-analysis-getting-started) | Operational logs |
-|  | [Activity Tracker Event Routing](/docs/activity-tracker?topic=activity-tracker-getting-started) | Audit logs |
+|  | [IBM Cloud Logs](/docs/cloud-logs?topic=cloud-logs-getting-started) | Operational and Audit logs |
 {: caption="Components" caption-side="bottom"}
